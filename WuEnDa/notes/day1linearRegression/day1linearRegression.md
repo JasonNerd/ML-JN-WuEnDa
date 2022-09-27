@@ -190,12 +190,7 @@ plt.show()
   df.drop(columns=['b'])       # drop a column
   ```
 
-3. 一些常见操作pd, np, plt
-   1. ddd
-   2. ddd
-   3. ddd
-
-4. Markdown基本教程
+3. Markdown基本教程
    1. [Markdown基本教程](https://editor.mdnice.com/?outId=d988634c248640a7bd2f20d8c32b5e4a)
    2. [Markdown数学公式](https://blog.csdn.net/jyfu2_12/article/details/79207643)
   
