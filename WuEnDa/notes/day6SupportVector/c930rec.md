@@ -14,3 +14,12 @@
   * [勾股定理](https://xinzhi.wenda.so.com/a/1605259894202383)
   * [三角形余弦定理](http://www.gaosan.com/gaokao/81357.html)
   * [向量的点乘](https://blog.csdn.net/dcrmg/article/details/52416832)
+* [conda虚拟环境的使用](https://zhuanlan.zhihu.com/p/94744929)
+  ```bat
+  conda create -n env_name python=x.xx
+  conda info -e
+  conda activate env_name
+  conda deactivate
+  ```
+  
+  
