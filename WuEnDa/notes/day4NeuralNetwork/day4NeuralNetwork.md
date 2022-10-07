@@ -84,7 +84,7 @@
         & \delta^{(3)} = (\Theta^{(3)})^T\delta^{(4)}\cdot g'(z^{(3)}) \\
         & =(\Theta^{(3)})^T\delta^{(4)}\cdot g(z^{(3)})(1-g(z^{(3)})) \\
         & = (\Theta^{(3)})^T\delta^{(4)}\cdot a^{(3)}\cdot (1-a^{(3)}) \\
-        & \delta^{(2)} = (\Theta^{(2)})^T\delta^{(3)}\cdot a^{(3)}\cdot (1-a^{(2)}) \\
+        & \delta^{(2)} = (\Theta^{(2)})^T\delta^{(3)}\cdot a^{(2)}\cdot (1-a^{(2)}) \\
     \end{align*}
     $$
   * 有了误差计算后，就可以完整的实现一个BP算法了，给定训练数据集$\{(x^{(1)}, y^{(1)}), (x^{(2)}, y^{(2)}), \cdots, (x^{(m)}, y^{(m)})\}$
