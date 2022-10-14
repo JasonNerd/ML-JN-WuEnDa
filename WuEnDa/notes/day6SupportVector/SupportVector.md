@@ -21,4 +21,44 @@ $$ max \rightarrow dmin $$ s.t. $$d=\frac{|\omega^Tx+b|}{|\omega|} >= dmin$$
 
 $$ max \frac{1}{||\omega||}$$ s.t. $$y_i(\omega^Tx_i+b)>=1 (i=1, ..., m)$$
 
+## 从代价函数的变化看支持向量机
+&emsp;&emsp;对率回归模型的代价函数基本形式是：
+$$J=-\frac{1}{m}\sum_{i=1}^m(y_i*ln(h)+(1-y_i)*ln(1-h))+\frac{\lambda}{2m}\sum_{j=1}^m\theta^2_j$$
+不考虑正则化项, 对于单个样本
+$$J = y*(-ln\frac{1}{e^{-\theta^Tx}+1})+(1-y)*(1-ln\frac{1}{e^{-\theta^Tx}+1})$$
+也即
+$$J = y*cost_1(\theta^Tx)+(1-y)*cost_0(\theta^Tx)$$
+$y=1$时$J=cost_1$而$y=0$时$J=cost_0$，分别作出$cost_0$和$cost_1$的函数图像如下:
 
+<div align=center><img src="http://www.ai-start.com/ml2014/images/66facb7fa8eddc3a860e420588c981d5.png" witdh=80%/></div>
+
+&emsp;&emsp;洋红色的曲线即为SVM对应的两个$cost$函数，可见SVM将其进行了简化，但同时又与对率函数的很接近。并且我们对代价函数进行了一定的抽象，同时在$SVM$中，不再使用$A+\lambda B$的形式，而是使用$C*A+B$的形式，同时不考虑m这个值，就有了
+
+<div align=center><img src="http://www.ai-start.com/ml2014/images/cc66af7cbd88183efc07c8ddf09cbc73.png" witdh=80%/></div>
+
+
+&emsp;&emsp;观察到，当样本分类为正类时，必须满足条件$\theta^Tx>=1$否则必须满足$\theta^Tx<=-1$，因而支持向量机有时被称为**大间距分类器**，此时将得到一个“有趣的”决策边界。
+
+### 如何理解SVM的决策边界具有这样的大间隔
+&emsp;&emsp;考虑SVM的总体代价函数：
+$$C\sum_{i=1}^m[ycost_1+(1-y)cost_0]+\frac{1}{2}\sum_{j=1}^n\theta_j^2$$
+
+&emsp;&emsp;为了便于理解，尽量考虑理想化情况，假设C无限大，为了优化J，就必须满足有$y=1\rightarrow cost_1=0$ 而 $y=0\rightarrow cost_0=0$使得前面的项无限接近于0，因此优化目标就变为了$minimize \rightarrow \sum_{j=1}^n\theta_j^2$，从向量角度的观点，也即是要使得$||\theta||$最小化，此即为$\theta$的模长。优化问题表征如下：
+
+<div align=center><img src="http://www.ai-start.com/ml2014/images/03bd4b3ff69e327f7949c3d2a73eed8a.png" witdh=80%/></div>
+
+**因此支持向量机做的全部事情，就是极小化参数向量范数的平方，或者说长度的平方**
+
+&emsp;&emsp;**向量内积**的讨论：$(u, v) = u^Tv = v^Tu$。因此$\theta^Tx$也即$\theta$向量与样本$x$向量的内积，不考虑截距$\theta_0$，假定只有两个特征，这就变为了两个平面向量的点乘。$$\theta^Tx=\theta.x=||\theta||*||x||*cost<\theta, x>$$
+接着引入**投影**的概念，他表示的是一个向量在另一个向量上的投影，是一个标量，具备正负号，取决于两个向量夹角，就有了：$$\theta^Tx=\theta.x=Proj^x_\theta*||\theta||$$
+
+&emsp;&emsp;于是一切变得明晰起来，如下图：
+
+<div align=center><img src="http://www.ai-start.com/ml2014/images/5eab58ad9cb54b3b6fda8f6c96efff24.png" witdh=80%/></div>
+
+&emsp;&emsp;图中，由于截距项为$0$，因此决策边界总是过原点，同时，决策边界上的点总满足$\theta^Tx=0$，因此决策边界与$\theta$向量垂直。以正例中位于第四象限的样本$x$为例，在满足$Proj^x_\theta*||\theta||>=1$的条件下（也即可以正确划分样本的条件下），为了减小$\theta$的模长，则$x$在$\theta$方向上的投影长度越大越好，图中左侧给出了一个坏的边界绿色线条，作出$\theta$方向，再给出投影，也即红色短线的长度，比较小，因而是个坏边界。而如果像右侧取y轴作为决策界限，此时$\theta$方向为x轴正方向，样本在$\theta$方向上的投影都比较大。再次见证**SVM是一个大间隔分类器**。
+
+&emsp;&emsp;**总结起来，SVM向量机是一个大间隔分类器，简化了逻辑回归中的代价函数，所做的事情就是在保证大间距也就是正确分类的条件下最小化参数向量的模长，换句话说，就是总体来看，样本在参数向量方向上的投影最大。**
+
+## 在python中使用SVM进行数据训练
+// TODO:
