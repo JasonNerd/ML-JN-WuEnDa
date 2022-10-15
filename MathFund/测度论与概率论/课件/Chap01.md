@@ -5,7 +5,7 @@
 ### 空间、集合与元素
 任意一个非空集合$X$，称之为**空间**，集合$X$的子集记为A、B、C等，称之为**这个空间的集合**，$X$的成员称为**元素**。
 
-<div align=center><img src="https://files.mdnice.com/user/35698/3ee62b03-83a9-4c70-b353-c24fb9da131c.png" width=80%/></div>
+<div align=center><img src="https://files.mdnice.com/user/35698/3ee62b03-83a9-4c70-b353-c24fb9da131c.png" width=40%/></div>
 
 
 称之为A的指示函数。
@@ -39,19 +39,16 @@ A, B, AvB, A-B, B-A is in, so A^B = (AvB-((A-B)v(B-A))) is in
 #### 域(field)或代数(algebra)
 集合系S是域，当且仅当它对交和补封闭
 A, B, A^B, -A, -B is in, then A^-B = A-B and -A^B = B-A is in
-域必环，环必半环，半环必派系
+
+### 有限运算下集合系之间的关系
+**域必环，环必半环，半环必派系**
 
 ### 可列运算的特殊集合系
-#### 单调系
+#### 单调系， $\lambda$系，$\sigma$系（可测集）
+<div align=center><img src="https://files.mdnice.com/user/35698/052b5ee2-2b90-4bb7-8042-5ae24b42a843.png" width=80%/></div>
 
 
-#### $\lambda$系
-
-
-#### $\sigma$系（可测集）
-
-
-
-### 集合系小结--可测空间
-
+### 集合系小结
+1. 一个既是单调系又是域的集合系必是$\sigma$域
+2. 一个既是$\lambda$系又是$\pi$系的集合必是$\sigma$域
 

@@ -11,7 +11,7 @@ $n$阶方阵的置换矩阵$P$有$\binom{n}{1}=n!$个
 
 对置换矩阵$P$，有$P^TP = I$
 
-即$P^T = P^{-1}
+即$P^T = P^{-1}$
 ## 转置矩阵（Transpose Matrix）
 
 $(A^T)_{ij} = (A)_{ji}$
@@ -26,7 +26,7 @@ $$
 (R^TR)^T = (R)^T(R^T)^T = R^TR\\
 \textrm{即}(R^TR)^T = R^TR
 $$
-
+<div align=center><img src="https://iknow-pic.cdn.bcebos.com/bd315c6034a85edfcce0874359540923dd547565?x-bce-process=image%2Fresize%2Cm_lfit%2Cw_600%2Ch_800%2Climit_1%2Fquality%2Cq_85%2Fformat%2Cf_auto" width=80% /><div/>
 ## 向量空间（Vector Space）
 
 所有向量空间都必须包含原点（Origin）；
