@@ -10,10 +10,25 @@
 */
 
 #include <iostream>
-
+#include <vector>
 using namespace std;
 
+int minSubArrLen(int s, vector<int> nums){
+    int i = 0, sum = 0, j = 0, n = nums.size();
+    int res = n;
+    for (j=0; j<n; j++){
+        sum += nums[j];
+        while (sum >= s){
+            int sbl = j - i + 1;
+            res = sbl > res ? res : sbl;
+            sum -= nums[i++];
+        }
+    }
+    return res;
+}
+
 int main(){
-   
+   vector<int> nums = {2, 4, 4, 2, 3, 1, 5, 7, 2, 4, 3, 3};
+   cout << minSubArrLen(15, nums) << endl;
    return 0;
 }
