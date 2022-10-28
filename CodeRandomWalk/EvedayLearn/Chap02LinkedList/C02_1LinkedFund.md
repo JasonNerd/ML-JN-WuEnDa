@@ -40,7 +40,7 @@ ListNode* removeElements(ListNode* head, int val);
 ### 插入节点
 分配一个节点，本节点的指针域赋值为指定节点的指针域，再让指定节点的指针域赋值为本节点地址
 
-#### [例题2. 设计链表]()
+#### [例题2. 设计链表](https://leetcode.cn/problems/design-linked-list/)
 在链表类中实现这些功能：
 
 * get(index)：获取链表中第 index 个节点的值。如果索引无效，则返回-1。
