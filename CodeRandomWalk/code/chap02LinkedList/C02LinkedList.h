@@ -32,6 +32,8 @@ class MyLinkedList{
         void prtLinkedList(); // 打印链表
         void reverse(); // 反转链表
         void initArr(vector<int> a); // 使用a初始化链表
+        void swapPairs(); // 两两交换
+        void removeNthFromEnd(int n); // 删除倒数第n个节点
         void demostrate(); // 演示系统
 };
 
