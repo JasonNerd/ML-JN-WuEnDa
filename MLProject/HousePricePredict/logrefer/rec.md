@@ -24,3 +24,34 @@
     sns.boxplot(x=var, y="SalePrice", data=data)
     plt.show()
     ```
+
+### RMSE和RMSLE有什么区别？
+RMSLE计算公式
+![](https://files.mdnice.com/user/35698/acd54d97-4c15-4aee-b97d-29ba97c42dbc.png)
+请注意，在公式中，X 是预测值，Y 是实际值。
+
+当我们看到 RMSE 的公式时，它看起来就像是对数函数的差异。实际上，对数的微小差异是赋予RMSLE自身独特属性的主要因素。由于对数的性质，RMLSE 可以大致视为预测值和实际值之间的相对误差。RMSLE 对实际变量的低估比高估的惩罚更大。
+### 如何初始化模型参数
+[Pytorch 中torch.nn.Linear的权重初始化](https://blog.csdn.net/D_handsome/article/details/122715621)
+apply()函数
+```py
+net = nn.Sequential(nn.Flatten(), nn.Linear(784, 10))
+#nn.Flatten将多维张量压缩为二维（一行）进而进行线性操作、
+ 
+def init_weights(m):
+    if type(m) == nn.Linear:
+        nn.init.normal_(m.weight, std=0.01)
+ 
+net.apply(init_weights)
+```
+### torch.optim.Adam
+[torch.optim.Adam优化器参数学习](https://www.cnblogs.com/BlueBlueSea/p/14269033.html)
+
+```py
+Adam(params, lr=0.001, betas=(0.9, 0.999), eps=1e-08, weight_decay=0)
+```
+* params (iterable) – 待优化参数的iterable或者是定义了参数组的dict
+* lr (float, 可选) – 学习率（默认：1e-3）
+* betas (Tuple[float, float], 可选) – 用于计算梯度以及梯度平方的运行平均值的系数（默认：0.9，0.999）
+* eps (float, 可选) – 为了增加数值计算的稳定性而加到分母里的项（默认：1e-8）
+* weight_decay (float, 可选) – 权重衰减（L2惩罚）（默认: 0）
