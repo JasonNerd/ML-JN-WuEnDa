@@ -137,8 +137,8 @@ def loadFashionMnist(batch_size, resize=None):
     if resize:
         trans.insert(0, transforms.Resize(resize))
     trans = transforms.Compose(trans)
-    mnist_train = torchvision.datasets.FashionMNIST(root="../../data", train=True, transform=trans)
-    mnist_test = torchvision.datasets.FashionMNIST(root="../../data", train=False, transform=trans)
+    mnist_train = torchvision.datasets.FashionMNIST(root="../data", train=True, transform=trans)
+    mnist_test = torchvision.datasets.FashionMNIST(root="../data", train=False, transform=trans)
     return (data.DataLoader(mnist_train, batch_size, shuffle=True,
                             num_workers=get_dataloader_workers()),
             data.DataLoader(mnist_test, batch_size, shuffle=False,

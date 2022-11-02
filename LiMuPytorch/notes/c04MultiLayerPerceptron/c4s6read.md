@@ -106,8 +106,7 @@ model definition
 dropout1, dropout2 = 0.2, 0.5
 
 class Net(nn.Module):
-    def __init__(self, num_inputs, num_outputs, num_hiddens1, num_hiddens2,
-                 is_training = True):
+    def __init__(self, num_inputs, num_outputs, num_hiddens1, num_hiddens2, is_training = True):
         super(Net, self).__init__()
         self.num_inputs = num_inputs
         self.training = is_training
@@ -134,8 +133,6 @@ net = Net(num_inputs, num_outputs, num_hiddens1, num_hiddens2)
 num_epochs, lr, batch_size = 10, 0.5, 256
 loss = nn.CrossEntropyLoss(reduction='none')
 train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
-trainer = torch.optim.SGD(net.parameters(), lr=lr)
-d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)
 trainer = torch.optim.SGD(net.parameters(), lr=lr)
 d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)
 ```
