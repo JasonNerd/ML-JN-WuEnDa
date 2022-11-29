@@ -9,6 +9,8 @@ from torchvision import transforms
 from torch.utils import data
 from IPython import display
 from torch import nn
+import collections
+import re
 
 class Timer:
     """时间基准测试, 可以计算程序片段的运行时间"""
@@ -310,3 +312,74 @@ def train_ch6(net, train_iter, test_iter, num_epochs, lr, device):
     print(info)
     print(f'{metric[2] * num_epochs / timer.sum():.1f} examples/sec '
           f'on {str(device)}')
+
+def read_text(url=None):
+    if not url:
+        url = "../data/TheTimeMachine.txt"
+    with open(url, 'r', encoding='utf-8') as f:
+        lines = f.readlines()
+    return [re.sub(r"[^a-zA-Z]+", " ", line).strip().lower() for line in lines]
+
+def tokenize(lines, token="word"):
+    if token == "word":
+        return [line.split() for line in lines]
+    if token == "char":
+        return [list(line) for line in lines]
+
+class Vocab:
+    def __init__(self, tokens=None, min_freq=0, reserved_tokens=None):
+        if tokens is None:
+            tokens = []
+        if reserved_tokens is None:
+            reserved_tokens = []
+        # 将tokens展平为一个单词列表，对其中的单词进行计数并按词频倒序排序
+        counter = count_corpus(tokens)
+        self._token_freqs = sorted(counter.items(), 
+                                   key=lambda x: x[1], reverse=True)
+        # id->token, token->id
+        # 先处理保留词元，例如未定义词语
+        self.id2token = ['<unk>']+reserved_tokens
+        self.token2id = {token: idx for idx, token in enumerate(self.id2token)}
+        # 接下来对_token_freqs进行处理
+        for token, freq in self._token_freqs:
+            if freq < min_freq:
+                break
+            self.id2token.append(token)
+            self.token2id[token]=len(self.id2token)-1
+    
+    def __len__(self):
+        return len(self.id2token)
+    # 通过token获取id, 注意这是一个递归操作, 也即是可以传入列表的
+    def __getitem__(self, tokens):
+        if not isinstance(tokens, (list, tuple)):
+            # dict().get(key, default_value)
+            return self.token2id.get(tokens, self.unk)
+        return [self.__getitem__(token) for token in tokens]
+
+    def to_tokens(self, indices):
+        if not isinstance(indices, (list, tuple)):
+            return self.id2token[indices]
+        return [self.to_tokens[index] for index in indices]
+
+    @property
+    def unk(self):  # 未知词元的索引为0
+        return 0
+    # @property使得外部类可以通过函数名访问私有属性
+    @property
+    def token_freqs(self):
+        return self._token_freqs    
+
+def count_corpus(tokens):
+    """词频计数"""
+    if len(tokens) == 0 or isinstance(tokens[0], list):
+        tokens = [token for line in tokens for token in line]
+    return collections.Counter(tokens)
+
+def load_corpus_time_machine(max_tokens=-1):
+    lines = read_text()
+    tokens = tokenize(lines, token="char")
+    vocab = Vocab(tokens)
+    if max_tokens > 0:
+        corpus = corpus[:max_tokens]
+    corups = [vocab[token] for line in tokens for token in line]
+    return corups, vocab
